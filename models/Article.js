@@ -8,6 +8,10 @@ const ArticleSchema = new Schema({
         type: String,
         required: true
     },
+    teaser: {
+        type: String,
+        required: true
+    },
     // require a link string
     link: {
         type: String,
