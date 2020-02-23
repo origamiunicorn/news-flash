@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col s12">
+    <p>
+      Article Scraper!
+    </p>
+    {{#if articlesDocuments}}
+    {{#each articlesDocuments}}
+    <p>Title: {{this.title}} </p>
+
+    {{/each}}
+    {{else}}
+    <p>
+      You have yet to scrape any articles. Why not scrape now?
+    </p>
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+
+    <title>NPR Article Scraper</title>
+
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <div class="container">
+                        <a href="/" id="smalltext" class="brand-logo flow-text"><i
+                                class="material-icons">brightness_3</i> NPR Article Scraper</a>
+                        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+                        <div class="right">
+                            <a href="#" data-target="slide-out" class="sidenav-trigger"><i
+                                    class="material-icons">menu</i></a>
+                        </div>
+                    </div>
+            </nav>
+        </div>
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/game">Current Game(s)</a></li>
+            <li><a href="/start">Start New Game</a></li>
+            <li class="divider"></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        {{!-- <img src="/images/stardust.png"> --}}
+                    </div>
+                    {{!-- <a href="#user"><img class="circle" src="/images/loginicon.png"></a> --}}
+                    <a href="#name"><span class="white-text name">One Good Knight</span></a>
+                    <a href="#email"><span class="white-text email">Login to play!</span></a>
+                </div>
+            </li>
+            <li><a href="/"><i class="material-icons">home</i> Home</a></li>
+            <div class="divider"></div>
+            <li><a class="modal-trigger" href="#signupmodal"><i class="material-icons">assignment_ind</i> Sign Up</a>
+            </li>
+            <li><a class="modal-trigger" href="#loginmodal"><i class="material-icons">account_circle</i> Login</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <div class="container body-container">
+            {{!--  <div id="loginmodal" class="modal">
+                <div class="modal-content">
+                    {{> login/login-block}}
+                </div>
+            </div>
+
+            <div id="signupmodal" class="modal">
+                <div class="modal-content">
+                    {{> signup/signup-block}}
+                </div>
+            </div> --}}
+
+            {{{body}}}
+
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">NPR Article Scraper</h5>
+                    <p class="grey-text text-lighten-4">a text adventure game by This Is SPR-ta!</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="https://github.com/origamiunicorn/this-is-spr-ta"
+                                target="_blank">One Good Knight GitHub
+                                Repo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Copyright © 2020 This Is SPR-ta!
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
