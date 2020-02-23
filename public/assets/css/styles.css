@@ -1,0 +1,11 @@
+body {
+    font-family: 'Nunito', ;
+}
+
+@media (max-width: 768px){ 
+    #smalltext {
+        font-size: 1.3rem;  
+        margin-left: -70px;
+        padding: 0px;
+          }
+}

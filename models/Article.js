@@ -17,11 +17,6 @@ const ArticleSchema = new Schema({
         type: String,
         required: true
     },
-    // require a photo string
-    photo: {
-        type: String,
-        required: true
-    },
     // create a note object
     // ref links to the Note model, so notes related to an Article can be populated later
     note: {
