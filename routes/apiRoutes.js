@@ -35,12 +35,6 @@ module.exports = function (app) {
                     .children("div")
                     .children("a")
                     .attr("href");
-                result.photo = $(this)
-                    .children("div", ".item-image")
-                    .children("div")
-                    .children("a")
-                    .children("img")
-                    .attr("src");
                 // Create a new Article using the `result` object built from scraping
                 db.Article.create(result)
                     .then(function (dbArticle) {
@@ -92,4 +86,14 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
+
+    app.delete("/clear", function (req, res) {
+        db.Article.deleteMany({}, function (err) {
+            if (err) {
+                return handleError(err);
+            } else {
+                res.render("index");
+            }
+        })
+    })
 };
