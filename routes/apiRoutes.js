@@ -1,7 +1,7 @@
-const express = require("express");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const db = require("../models")
+const mongoose = require("mongoose");
 
 module.exports = function (app) {
 
@@ -86,35 +86,30 @@ module.exports = function (app) {
         })
     });
 
-    // // Route for grabbing a specific Article by id, populate it with it's note
-    // app.get("/articles/:id", function (req, res) {
-    //     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-    //     db.Article.findOne({ _id: req.params.id })
-    //         // ..and populate all of the notes associated with it
-    //         .populate("note")
-    //         .then(function (dbArticle) {
-    //             // If we were able to successfully find an Article with the given id, send it back to the client
-    //             res.json(dbArticle);
-    //         })
-    //         .catch(function (err) {
-    //             // If an error occurred, send it to the client
-    //             res.json(err);
-    //         });
-    // });
+    // grab article by id and populate with notes 
+    app.get("/articles/:id", function (req, res) {
+        db.Saved.findOne({ _id: req.params.id })
+            .populate("note")
+            .then(function (dbSaved) {
+                res.json(dbSaved);
+            })
+            .catch(function (err) {
+                // If an error occurred, send it to the client
+                res.json(err);
+            });
+    });
 
-    // Route for saving/updating an Article's associated Note
+    // for saving article notes
     app.post("/articles/:id", function (req, res) {
-        console.log("this is the new note req.body", req.body);
+
         db.Note.create(req.body)
             .then(function (dbNote) {
-                console.log("this is the req params id", req.params.id);
-                // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
-                return db.Saved.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+                // look for an article to save the note id into
+                return db.Saved.findOneAndUpdate({ _id: req.params.id }, { $push: { note: dbNote._id } }, { useFindAndModify: false });
             })
-            .then(function (dbArticle) {
-                // If we were able to successfully update an Article, send it back to the client
-                console.log("this is the dbArticle", dbArticle);
-                res.json(dbArticle);
+            .then(function (dbSaved) {
+                // send article back if successfully updated
+                res.json(dbSaved);
             })
             .catch(function (err) {
                 // If an error occurred, send it to the client
@@ -125,7 +120,7 @@ module.exports = function (app) {
     app.delete("/clear", function (req, res) {
         db.Article.deleteMany({}, function (err) {
             if (err) {
-                return handleError(err);
+                res.json(err);
             } else {
                 res.render("index");
             }
@@ -138,10 +133,30 @@ module.exports = function (app) {
 
         db.Saved.deleteOne({ _id: id }, function (err) {
             if (err) {
-                return handleError(err);
+                res.json(err);
             } else {
                 res.render("saved");
             }
         })
+    });
+
+    app.delete("/delete/note:id/:parent", function (req, res) {
+        const str = req.params.id;
+        const id = str.replace(":", "");
+        console.log("id string", id);
+        const strP = req.params.parent;
+        const par = strP.replace(":", "");
+        console.log("parent string", par);
+
+        db.Saved.findOneAndUpdate({ _id: par }, { $pull: { note: id } }, { useFindAndModify: false })
+            .then(function () {
+                db.Note.deleteOne({ _id: id }, function (err) {
+                    if (err) {
+                        res.json(err);
+                    } else {
+                        res.render("saved");
+                    }
+                })
+            })
     });
 };

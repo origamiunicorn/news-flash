@@ -19,10 +19,12 @@ const SavedArticleSchema = new Schema({
     },
     // create a note object
     // ref links to the Note model, so notes related to an Article can be populated later
-    note: {
-        type: Schema.Types.ObjectId,
-        ref: "Note"
-    }
+    note: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Note"
+        }
+    ]
 });
 
 // Create a model from the above schema using mongoose's model method

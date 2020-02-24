@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 // Using the Schema constructor, create a new NoteSchema
 const NoteSchema = new Schema({
-    // create a title string
-    title: String,
+    // title: { type: Schema.Types.ObjectId, ref: "Saved" },
     // create a body string
     body: String
 });

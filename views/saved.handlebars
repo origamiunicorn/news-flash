@@ -20,17 +20,11 @@
     <div class="container body-container">
         <div id="modalnotes" class="modal">
             <div class="modal-content">
-                <h4>Article Notes</h4>
-                <p id="artNotes">A bunch of text</p>
+                <h4 id="articleTitle"></h4>
+                <div id="notesContainer"></div>
                 <div class="divider"></div>
                 <div class="row">
                     <form class="col s12">
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="titleinput" type="text" class="validate">
-                                <label for="password">Title</label>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="input-field col s12">
                                 <textarea id="bodyinput" class="materialize-textarea"></textarea>
@@ -39,8 +33,7 @@
                         </div>
                         <div class="center-align">
                             <button class="btn waves-effect waves-light center-align" id="savenote" type="submit"
-                                name="action">Save
-                                Note
+                                name="action">Save Note
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>

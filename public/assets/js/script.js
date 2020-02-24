@@ -8,6 +8,7 @@ $(document).ready(function () {
     $(document).on("click", "#delete", deleteArticle);
     $(document).on("click", "#note", makeNote);
     $(document).on("click", "#savenote", saveNote);
+    $(document).on("click", ".deleteNote", deleteNote);
 });
 
 // Whenever someone clicks a #scrape tag
@@ -58,8 +59,6 @@ const deleteArticle = function () {
 };
 
 const makeNote = function () {
-    // Empty the notes from the note section
-    $("#notes").empty();
     const thisId = $(this).attr("data-id");
     console.log("this is thisId", thisId);
     $("#savenote").attr("data-id", thisId);
@@ -71,22 +70,12 @@ const makeNote = function () {
     })
         // With that done, add the note information to the page
         .then(function (data) {
-            console.log(data);
-            // The title of the article
-            $("#notes").append("<h2>" + data.title + "</h2>");
-            // An input to enter a new title
-            $("#notes").append("<input id='titleinput' name='title' >");
-            // A textarea to add a new note body
-            $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-            // A button to submit a new note, with the id of the article saved to it
-            $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
-
-            // If there's a note in the article
-            if (data.note) {
-                // Place the title of the note in the title input
-                $("#titleinput").val(data.note.title);
-                // Place the body of the note in the body textarea
-                $("#bodyinput").val(data.note.body);
+            console.log("this is data in the makeNote function", data);
+            $("#articleTitle").text(`Notes for "${data.title}."`);
+            for (let i = 0; i < data.note.length; i++) {
+                $("#notesContainer").append(`<p>${data.note[i].body} <i data-id="${data.note[i]._id}" data-parent-id="${data._id}"
+                class="small material-icons red-text text-darken-4 right deleteNote"
+                alt="Delete this note.">close</i></p>`);
             }
         });
 };
@@ -101,8 +90,6 @@ const saveNote = function () {
         method: "POST",
         url: "/articles/" + thisId,
         data: {
-            // Value taken from title input
-            title: $("#titleinput").val(),
             // Value taken from note textarea
             body: $("#bodyinput").val()
         }
@@ -116,6 +103,21 @@ const saveNote = function () {
         });
 
     // Also, remove the values entered in the input and textarea for note entry
-    $("#titleinput").val("");
     $("#bodyinput").val("");
+};
+
+const deleteNote = function (event) {
+    // event.stopPropagation();
+    // event.stopImmediatePropagation();
+
+    const id = $(this).attr("data-id");
+    const parent = $(this).attr("data-parent-id");
+    $.ajax(
+        {
+            method: "DELETE",
+            url: "/delete/note:" + id + "/:" + parent
+        }
+    ).then(function () {
+        window.location.reload();
+    });
 };
