@@ -1,6 +1,9 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsFlashDB";
+
+
 
 const PORT = 3000;
 
@@ -14,7 +17,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/newsFlashDB", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(MONGODB_URI);
 
 // Handlebars
 app.engine(
