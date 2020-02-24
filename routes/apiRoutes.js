@@ -55,25 +55,33 @@ module.exports = function (app) {
     app.post("/api/save:id", function (req, res) {
         const str = req.params.id;
         const id = str.replace(":", "");
-        db.Article.findById(id, function (err, article) {
-            // console.log(article);
-            const result = {};
-            result.id = article._id;
-            result.title = article.title;
-            result.teaser = article.teaser;
-            result.link = article.link;
 
-            console.log("this is the result", result);
-            db.Saved.create(result)
-        
-            .then(function (dbSaved) {
-                // View the added result in the console
-                console.log("this is the dbSaved", dbSaved);
+        db.Article.findById(id, function (err, article) {
+            const artTitle = article.title;
+
+            db.Saved.findOne({ title: artTitle }).exec(function (err, savedArt) {
+                if (!savedArt) {
+                    console.log("Article by that title not found in saved DB.")
+
+                    const artObj = {};
+                    artObj.title = article.title;
+                    artObj.teaser = article.teaser;
+                    artObj.link = article.link;
+
+                    db.Saved.create(artObj)
+                        .then(function (dbSaved) {
+                            // View the added result in the console
+                            console.log("this is the dbSaved", dbSaved);
+                        })
+                        .catch(function (err) {
+                            // If an error occurred, log it
+                            console.log(err);
+                        })
+                } else {
+                    console.log("Article by that title found in saved DB.")
+                }
             })
-                .catch(function (err) {
-                    // If an error occurred, log it
-                    console.log(err);
-                })
+            res.send("Article save complete.");
         })
     });
 
