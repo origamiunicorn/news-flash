@@ -2,6 +2,10 @@ body {
     font-family: 'Nunito', ;
 }
 
+.paddingbutton {
+    margin-right: 20px;
+}
+
 @media (max-width: 768px){ 
     #smalltext {
         font-size: 1.3rem;  

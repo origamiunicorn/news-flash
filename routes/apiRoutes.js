@@ -129,5 +129,18 @@ module.exports = function (app) {
                 res.render("index");
             }
         })
-    })
+    });
+
+    app.delete("/api/delete:id", function (req, res) {
+        const str = req.params.id;
+        const id = str.replace(":", "");
+
+        db.Saved.deleteOne({ _id: id }, function (err) {
+            if (err) {
+                return handleError(err);
+            } else {
+                res.render("saved");
+            }
+        })
+    });
 };
