@@ -109,7 +109,7 @@ module.exports = function (app) {
             })
             .then(function (dbSaved) {
                 // send article back if successfully updated
-                res.json(dbSaved);
+                res.render("saved");
             })
             .catch(function (err) {
                 // If an error occurred, send it to the client

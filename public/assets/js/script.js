@@ -89,8 +89,6 @@ const makeNote = function () {
                 class="small material-icons red-text text-darken-4 right deleteNote"
                 alt="Delete this note.">close</i></p>`);
             }
-        }).then(function () {
-            window.location.reload();
         });
 };
 
