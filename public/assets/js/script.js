@@ -72,7 +72,6 @@ const deleteArticle = function () {
 
 const makeNote = function () {
     const thisId = $(this).attr("data-id");
-    console.log("this is thisId", thisId);
     $("#savenote").attr("data-id", thisId);
 
     // Now make an ajax call for the Article
@@ -82,8 +81,8 @@ const makeNote = function () {
     })
         // With that done, add the note information to the page
         .then(function (data) {
-            console.log("this is data in the makeNote function", data);
             $("#articleTitle").text(`Notes for "${data.title}."`);
+            $("#notesContainer").empty();
             for (let i = 0; i < data.note.length; i++) {
                 $("#notesContainer").append(`<p>${data.note[i].body} <i data-id="${data.note[i]._id}" data-parent-id="${data._id}"
                 class="small material-icons red-text text-darken-4 right deleteNote"
