@@ -30,7 +30,7 @@ module.exports = function (app) {
 
     app.get("/saved", function (req, res) {
 
-        db.Article.find()
+        db.Saved.find()
             .then(documents => {
                 const context = {
                     articlesDocuments: documents.map(document => {
@@ -38,12 +38,11 @@ module.exports = function (app) {
                             id: document._id,
                             title: document.title,
                             teaser: document.teaser,
-                            photo: document.photo,
                             link: document.link
                         }
                     })
                 }
-                res.render("index", { title: "Scraped Articles", articlesDocuments: context.articlesDocuments });
+                res.render("saved", { title: "Scraped Articles", articlesDocuments: context.articlesDocuments });
             })
             .catch(function (err) {
                 // If an error occurred, send it to the client

@@ -30,7 +30,7 @@ const SavedArticleSchema = new Schema({
 });
 
 // Create a model from the above schema using mongoose's model method
-const SavedArticle = mongoose.model("SavedArticle", SavedArticleSchema);
+const Saved = mongoose.model("SavedArticle", SavedArticleSchema);
 
 // Export the Article model
-module.exports = SavedArticle;
+module.exports = Saved;

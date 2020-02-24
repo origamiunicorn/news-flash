@@ -1,35 +1,57 @@
-{{#if articlesDocuments}}
-{{#each articlesDocuments}}
-<div class="row" data-id="{{this._id}}">
-  <div class="col s12">
-    <h4>
-      {{this.title}}
-    </h4>
+<header>
+  {{> nav/nav-block}}
+</header>
+
+<div class="parallax-container center valign-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 white-text">
+        <h1 style="font-family: 'Bitter';">Mongo Scraper</h1>
+        <h3 style="font-family: 'Bitter';">National Public Radio Edition</h3>
+      </div>
+    </div>
   </div>
-  <div class="col s12">
-    <blockquote>
-      {{this.teaser}}
-    </blockquote>
-  </div>
-  <div class="col s6">
-    <h6>
-      <a href="{{this.link}}">Read the full article...</a>
-    </h6>
-  </div>
-  <div class="col s6">
-    <button class="btn waves-effect green lighten-1 right" type="submit" name="action" data-id="{{this._id}}">Save
-      Article
-      <i class="material-icons left">check_box</i>
-    </button>
+  <div class="parallax">
+    <img src="/assets/images/newsbackground.jpg">
   </div>
 </div>
-{{/each}}
-{{else}}
-<div class="row">
-  <div class="col s12">
-    <h4>
-      You have yet to scrape any articles. Why not scrape now?
-    </h4>
+
+<main>
+  <div class="container body-container">
+    {{#if articlesDocuments}}
+    {{#each articlesDocuments}}
+    <div class="row" data-id="{{this.id}}">
+      <div class="col s12">
+        <h4>
+          {{this.title}}
+        </h4>
+      </div>
+      <div class="col s12">
+        <blockquote>
+          {{this.teaser}}
+        </blockquote>
+      </div>
+      <div class="col s6">
+        <h6>
+          <a href="{{this.link}}">Read full article...</a>
+        </h6>
+      </div>
+      <div class="col s6">
+        <button class="btn waves-effect green lighten-1 right" type="submit" name="action" data-id="{{this.id}}">Save
+          Article
+          <i class="material-icons left">check_box</i>
+        </button>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="row">
+      <div class="col s12">
+        <h4>
+          You have yet to scrape any articles. Why not scrape now?
+        </h4>
+      </div>
+    </div>
+    {{/if}}
   </div>
-</div>
-{{/if}}
+</main>
