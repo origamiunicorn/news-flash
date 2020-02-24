@@ -127,6 +127,16 @@ module.exports = function (app) {
         })
     });
 
+    app.delete("/clearsav", function (req, res) {
+        db.Saved.deleteMany({}, function (err) {
+            if (err) {
+                res.json(err);
+            } else {
+                res.render("saved");
+            }
+        })
+    });
+
     app.delete("/api/delete:id", function (req, res) {
         const str = req.params.id;
         const id = str.replace(":", "");

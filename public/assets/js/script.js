@@ -4,6 +4,7 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
     $(document).on("click", "#scrape", scrapeArticles);
     $(document).on("click", "#clear", clearArticles);
+    $(document).on("click", "#clearSaved", clearSaved);
     $(document).on("click", "#save", saveArticle);
     $(document).on("click", "#delete", deleteArticle);
     $(document).on("click", "#note", makeNote);
@@ -28,6 +29,17 @@ const clearArticles = function () {
         {
             method: "DELETE",
             url: "/clear"
+        }
+    ).then(function () {
+        window.location.reload();
+    });
+};
+
+const clearSaved = function () {
+    $.ajax(
+        {
+            method: "DELETE",
+            url: "/clearsav"
         }
     ).then(function () {
         window.location.reload();
