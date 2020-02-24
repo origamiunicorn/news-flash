@@ -3,8 +3,6 @@ const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsFlashDB";
 
-
-
 const PORT = 3000;
 
 // Initialize Express
@@ -29,9 +27,7 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-
 require("./routes/htmlRoutes")(app);
-
 require("./routes/apiRoutes")(app);
 
 app.listen(PORT, function () {
@@ -41,6 +37,5 @@ app.listen(PORT, function () {
         PORT
     );
 });
-
 
 module.exports = app;
