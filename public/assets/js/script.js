@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('.parallax').parallax();
-    $('.sidenav').sidenav();
     $('.modal').modal();
+    $('.sidenav').sidenav();
     $(document).on("click", "#scrape", scrapeArticles);
     $(document).on("click", "#clear", clearArticles);
     $(document).on("click", "#save", saveArticle);

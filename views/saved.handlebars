@@ -18,6 +18,39 @@
 
 <main>
     <div class="container body-container">
+        <div id="modalnotes" class="modal">
+            <div class="modal-content">
+                <h4>Article Notes</h4>
+                <p>A bunch of text</p>
+                <div class="divider"></div>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="title" type="text" class="validate">
+                                <label for="password">Title</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="body" class="materialize-textarea"></textarea>
+                                <label for="body">Note</label>
+                            </div>
+                        </div>
+                        <div class="center-align">
+                            <button class="btn waves-effect waves-light center-align" type="submit" name="action">Save
+                                Note
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
+
         {{#if articlesDocuments}}
         {{#each articlesDocuments}}
         <div class="row" data-id="{{this.id}}">
@@ -41,8 +74,8 @@
                     <i class="material-icons right">close</i>
                 </button>
 
-                <button class="btn waves-effect green lighten-1 right paddingbutton" id="note"
-                    data-id="{{this.id}}">Add/Review Notes
+                <button class="btn modal-trigger waves-effect green lighten-1 right paddingbutton" id="note"
+                    data-target="modalnotes" data-id="{{this.id}}">Add/Review Notes
                     <i class="material-icons left">check_box</i>
                 </button>
             </div>
