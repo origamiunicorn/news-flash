@@ -17,8 +17,6 @@ const ArticleSchema = new Schema({
         type: String,
         required: true
     },
-    // create a note object
-    // ref links to the Note model, so notes related to an Article can be populated later
     note: {
         type: Schema.Types.ObjectId,
         ref: "Note"

@@ -21,24 +21,25 @@
         <div id="modalnotes" class="modal">
             <div class="modal-content">
                 <h4>Article Notes</h4>
-                <p>A bunch of text</p>
+                <p id="artNotes">A bunch of text</p>
                 <div class="divider"></div>
                 <div class="row">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="title" type="text" class="validate">
+                                <input id="titleinput" type="text" class="validate">
                                 <label for="password">Title</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="body" class="materialize-textarea"></textarea>
+                                <textarea id="bodyinput" class="materialize-textarea"></textarea>
                                 <label for="body">Note</label>
                             </div>
                         </div>
                         <div class="center-align">
-                            <button class="btn waves-effect waves-light center-align" type="submit" name="action">Save
+                            <button class="btn waves-effect waves-light center-align" id="savenote" type="submit"
+                                name="action">Save
                                 Note
                                 <i class="material-icons right">send</i>
                             </button>
