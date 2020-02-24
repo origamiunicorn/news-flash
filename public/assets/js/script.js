@@ -112,6 +112,7 @@ const saveNote = function () {
             console.log(data);
             // Empty the notes section
             $("#notes").empty();
+            window.location.reload();
         });
 
     // Also, remove the values entered in the input and textarea for note entry
