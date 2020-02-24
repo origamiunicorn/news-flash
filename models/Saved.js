@@ -17,10 +17,6 @@ const SavedArticleSchema = new Schema({
         type: String,
         required: true
     },
-    saved: {
-        type: Boolean,
-        required: true
-    },
     // create a note object
     // ref links to the Note model, so notes related to an Article can be populated later
     note: {

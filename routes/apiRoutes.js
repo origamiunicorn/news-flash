@@ -51,6 +51,32 @@ module.exports = function (app) {
         });
     });
 
+    // save an article
+    app.post("/api/save:id", function (req, res) {
+        const str = req.params.id;
+        const id = str.replace(":", "");
+        db.Article.findById(id, function (err, article) {
+            // console.log(article);
+            const result = {};
+            result.id = article._id;
+            result.title = article.title;
+            result.teaser = article.teaser;
+            result.link = article.link;
+
+            console.log("this is the result", result);
+            db.Saved.create(result)
+        
+            .then(function (dbSaved) {
+                // View the added result in the console
+                console.log("this is the dbSaved", dbSaved);
+            })
+                .catch(function (err) {
+                    // If an error occurred, log it
+                    console.log(err);
+                })
+        })
+    });
+
     // Route for grabbing a specific Article by id, populate it with it's note
     app.get("/articles/:id", function (req, res) {
         // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...

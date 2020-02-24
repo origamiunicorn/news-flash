@@ -4,6 +4,7 @@ $(document).ready(function () {
     $('.modal').modal();
     $(document).on("click", "#scrape", scrapeArticles);
     $(document).on("click", "#clear", clearArticles);
+    $(document).on("click", "#save", saveArticle);
 });
 
 // Whenever someone clicks a #scrape tag
@@ -23,6 +24,18 @@ const clearArticles = function () {
         {
             method: "DELETE",
             url: "/clear"
+        }
+    ).then(function () {
+        window.location.reload();
+    });
+};
+
+const saveArticle = function () {
+    const id = $(this).attr("data-id");
+    $.ajax(
+        {
+            method: "POST",
+            url: "/api/save:" + id
         }
     ).then(function () {
         window.location.reload();
